@@ -1,6 +1,6 @@
 import { View, TextInput, StyleSheet } from "react-native"
 
-const InputField = (props) => {
+const CustomInput = (props) => {
   const { value, setValue, placeholder, isPassword } = props
 
   return (
@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default InputField
+export default CustomInput
