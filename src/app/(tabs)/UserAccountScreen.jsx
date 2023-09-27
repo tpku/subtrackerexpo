@@ -25,6 +25,7 @@ export default UserAccountScreen = () => {
 
       <View style={styles.container}>
         <Text style={{ fontSize: 22 }}>Kontodetaljer</Text>
+
         <View style={styles.textRow}>
           <Text style={styles.textMedium}>Förnamn:</Text>
           <CustomInput
@@ -33,14 +34,16 @@ export default UserAccountScreen = () => {
             // setValue={setFirstName}
           />
         </View>
+
         <View style={styles.textRow}>
-          <Text style={styles.textMedium}>Efternamn:</Text>{" "}
+          <Text style={styles.textMedium}>Efternamn:</Text>
           <CustomInput
             placeholder="Efternamn"
             // value={lastName}
             // setValue={setLastName}
           />
         </View>
+
         <View style={styles.textRow}>
           <Text style={styles.textMedium}>E-post:</Text>
           <CustomInput
@@ -49,6 +52,7 @@ export default UserAccountScreen = () => {
             // setValue={setLastName}
           />
         </View>
+
         <View style={styles.textRow}>
           <Text style={styles.textMedium}>Adress:</Text>
           <CustomInput
@@ -57,6 +61,7 @@ export default UserAccountScreen = () => {
             // setValue={setLastName}
           />
         </View>
+
         <View style={styles.textRow}>
           <Text style={styles.textMedium}>Telefon:</Text>
           <CustomInput
@@ -65,6 +70,7 @@ export default UserAccountScreen = () => {
             // setValue={setLastName}
           />
         </View>
+
         <CustomButton
           text="Spara ändringar"
           // onPress={logout}
@@ -80,6 +86,7 @@ export default UserAccountScreen = () => {
           textType="SECONDARY"
           // isLoggedIn={"loggedIn"}
         />
+
         <CustomButton
           text="Avsluta konto"
           onPress={DeleteAccount}

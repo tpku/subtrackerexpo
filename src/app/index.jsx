@@ -5,6 +5,7 @@ import { supabase } from "./lib/supabase"
 
 export default Index = () => {
   // const [session, setSession] = (useState < Session) | (null > null)
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) {

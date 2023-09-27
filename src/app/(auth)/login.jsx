@@ -2,8 +2,15 @@ import { View, StyleSheet } from "react-native"
 import React from "react"
 import { Link, Stack, router } from "expo-router"
 import CustomButton from "../../components/CustomButton"
+import usePushNotifications from "../usePushNotifications"
 
 export default StartScreen = () => {
+  // FIXME: Delete
+  const { expoPushToken } = usePushNotifications()
+
+  // FIXME: Delete
+  console.log(expoPushToken)
+
   const NavigateLogin = () => {
     // <Link href={}/>
     router.replace("/LoginScreen")
@@ -19,6 +26,8 @@ export default StartScreen = () => {
         <CustomButton text="Logga in" onPress={NavigateLogin} />
         <CustomButton text="Skapa konto" onPress={NavigateSignup} />
       </View>
+      {/*  // FIXME: Delete */}
+      {usePushNotifications()}
     </>
   )
 }
