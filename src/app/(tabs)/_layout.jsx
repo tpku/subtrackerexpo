@@ -1,6 +1,15 @@
-import { Tabs } from "expo-router"
+import { Tabs, router } from "expo-router"
+import { Alert } from "react-native"
+import { supabase } from "../lib/supabase"
 
 export default () => {
+  supabase.auth.getSession().then(({ data: { session } }) => {
+    if (!session) {
+      router.replace("/(auth)/login")
+      console.log("No user")
+      Alert.alert("No user")
+    }
+  })
   return (
     <>
       <Tabs screenOptions={{ headerShown: false }}>

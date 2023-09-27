@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native"
 import { Stack, useLocalSearchParams } from "expo-router"
 
-import InputField from "../../components/InputField"
+import CustomInput from "../../components/CustomInput"
 import CustomButton from "../../components/CustomButton"
 
 export default DeleteUserAccount = () => {
@@ -14,8 +14,8 @@ export default DeleteUserAccount = () => {
         <Text style={(styles.textMedium, styles.text)}>
           Bekräfta med email och lösenord för att radera konto
         </Text>
-        <InputField placeholder="E-post" />
-        <InputField placeholder="Lösenord" />
+        <CustomInput placeholder="E-post" />
+        <CustomInput placeholder="Lösenord" />
         <View>
           <Text style={styles.text}>
             ✓ Säker att du radera ditt konto på Subee?

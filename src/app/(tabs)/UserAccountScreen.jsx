@@ -1,14 +1,24 @@
-import React from "react"
-import { StyleSheet, View, Text, TextInput } from "react-native"
-import { Link, Stack, router } from "expo-router"
+import React, { useState } from "react"
+import { StyleSheet, View, Text } from "react-native"
+import { Stack, router } from "expo-router"
 
-import InputField from "../../components/InputField"
+import { supabase } from "../lib/supabase"
+import CustomInput from "../../components/CustomInput"
 import CustomButton from "../../components/CustomButton"
 export default UserAccountScreen = () => {
+  const [loading, setLoading] = useState(false)
+
   const DeleteAccount = () => {
-    // <Link href={}/>
     router.replace("/DeleteUserAccount/Confirm")
   }
+
+  const logout = async () => {
+    setLoading(true)
+    const { error } = await supabase.auth.signOut()
+    if (error) Alert.alert(error.message)
+    setLoading(false)
+  }
+
   return (
     <>
       <Stack.Screen options={{ headerShown: true, title: "User Settings" }} />
@@ -17,7 +27,7 @@ export default UserAccountScreen = () => {
         <Text style={{ fontSize: 22 }}>Kontodetaljer</Text>
         <View style={styles.textRow}>
           <Text style={styles.textMedium}>Förnamn:</Text>
-          <InputField
+          <CustomInput
             placeholder="Förnamn"
             // value={firstName}
             // setValue={setFirstName}
@@ -25,7 +35,7 @@ export default UserAccountScreen = () => {
         </View>
         <View style={styles.textRow}>
           <Text style={styles.textMedium}>Efternamn:</Text>{" "}
-          <InputField
+          <CustomInput
             placeholder="Efternamn"
             // value={lastName}
             // setValue={setLastName}
@@ -33,7 +43,7 @@ export default UserAccountScreen = () => {
         </View>
         <View style={styles.textRow}>
           <Text style={styles.textMedium}>E-post:</Text>
-          <InputField
+          <CustomInput
             placeholder="E-post"
             // value={lastName}
             // setValue={setLastName}
@@ -41,7 +51,7 @@ export default UserAccountScreen = () => {
         </View>
         <View style={styles.textRow}>
           <Text style={styles.textMedium}>Adress:</Text>
-          <InputField
+          <CustomInput
             placeholder="Adress"
             // value={lastName}
             // setValue={setLastName}
@@ -49,7 +59,7 @@ export default UserAccountScreen = () => {
         </View>
         <View style={styles.textRow}>
           <Text style={styles.textMedium}>Telefon:</Text>
-          <InputField
+          <CustomInput
             placeholder="Telefon"
             // value={lastName}
             // setValue={setLastName}
@@ -65,7 +75,7 @@ export default UserAccountScreen = () => {
 
         <CustomButton
           text="Logga ut"
-          // onPress={logout}
+          onPress={logout}
           btnType="SECONDARY"
           textType="SECONDARY"
           // isLoggedIn={"loggedIn"}

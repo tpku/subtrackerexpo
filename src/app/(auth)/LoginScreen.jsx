@@ -3,75 +3,64 @@ import { Alert, StyleSheet, View, Text } from "react-native"
 import { Stack } from "expo-router"
 import { supabase } from "../lib/supabase"
 import CustomButton from "../../components/CustomButton"
-import InputField from "../../components/InputField"
+import CustomInput from "../../components/CustomInput"
 
-export default function login() {
+export default login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
 
-  async function signInWithEmail() {
+  const signInWithEmail = async (email, password) => {
     setLoading(true)
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     })
+
+    if (data) {
+      console.log(data)
+    }
 
     if (error) Alert.alert(error.message)
     setLoading(false)
   }
 
-  async function signUpWithEmail() {
-    setLoading(true)
-    const { error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-    })
-
-    if (error) Alert.alert(error.message)
-    setLoading(false)
+  // FIXME: Add restore password supabase function
+  const onRetrievePasswordPress = async (content) => {
+    console.warn("Retrieve password pressed")
   }
 
   return (
     <>
       <Stack.Screen options={{ headerShown: false }} />
       <View style={styles.container}>
-        <Text>Logga in</Text>
-        <View>
-          <InputField
-            label="Email"
-            //   leftIcon={{ type: "font-awesome", name: "envelope" }}
-            onChangeText={(text) => setEmail(text)}
-            value={email}
-            placeholder="email@address.com"
-            autoCapitalize={"none"}
-          />
-        </View>
-        <View>
-          <InputField
-            label="Password"
-            //   leftIcon={{ type: "font-awesome", name: "lock" }}
-            onChangeText={(text) => setPassword(text)}
-            value={password}
-            secureTextEntry={true}
-            placeholder="Password"
-            autoCapitalize={"none"}
-          />
-        </View>
-        <View>
-          <CustomButton
-            text="Logga in"
-            disabled={loading}
-            onPress={() => signInWithEmail()}
-          />
-        </View>
-        <View>
-          <CustomButton
-            text="Skapa konto"
-            disabled={loading}
-            onPress={() => signUpWithEmail()}
-          />
-        </View>
+        <Text style={styles.textMedium}>Logga in</Text>
+
+        <CustomInput
+          placeholder="testman@test.com"
+          label="Email"
+          value={email}
+          setValue={setEmail}
+          autoCapitalize={"none"}
+        />
+
+        <CustomInput
+          placeholder="Lösenord"
+          label="Password"
+          value={password}
+          setValue={setPassword}
+          secureTextEntry={true}
+          isPassword
+          autoCapitalize={"none"}
+        />
+
+        <CustomButton
+          text="Logga in"
+          disabled={loading}
+          onPress={() => signInWithEmail(email, password)}
+        />
+
+        <Text>[Återställ lösenord]</Text>
       </View>
     </>
   )
@@ -84,13 +73,14 @@ const styles = StyleSheet.create({
     padding: 16,
     alignItems: "center",
     justifyContent: "center",
+    gap: 24,
   },
   verticallySpaced: {
     paddingTop: 4,
     paddingBottom: 4,
     alignSelf: "stretch",
   },
-  mt20: {
-    marginTop: 20,
+  textMedium: {
+    fontSize: 20,
   },
 })
